@@ -23,14 +23,14 @@ class OphimCrawlerServiceProvider extends SP
     {
 
         config(['plugins' => array_merge(config('plugins', []), [
-            'hacoidev/ophim-crawler' =>
+            'ophim-crawler' =>
             [
-                'name' => 'Ophim Crawler',
-                'package_name' => 'hacoidev/ophim-crawler',
+                'name' => 'Tải dữ liệu Ophim',
+                'package_name' => 'tannhatcms/ophim-crawler',
                 'icon' => 'la la-hand-grab-o',
                 'entries' => [
-                    ['name' => 'Crawler', 'icon' => 'la la-hand-grab-o', 'url' => backpack_url('/plugin/ophim-crawler')],
-                    ['name' => 'Option', 'icon' => 'la la-cog', 'url' => backpack_url('/plugin/ophim-crawler/options')],
+                    ['name' => 'Tải dữ liệu', 'icon' => 'la la-hand-grab-o', 'url' => backpack_url('/plugin/ophim-crawler')],
+                    ['name' => 'Cài đặt', 'icon' => 'la la-cog', 'url' => backpack_url('/plugin/ophim-crawler/options')],
                 ],
             ]
         ])]);
@@ -38,7 +38,7 @@ class OphimCrawlerServiceProvider extends SP
         config(['logging.channels' => array_merge(config('logging.channels', []), [
             'ophim-crawler' => [
                 'driver' => 'daily',
-                'path' => storage_path('logs/hacoidev/ophim-crawler.log'),
+                'path' => storage_path('logs/tannhatcms/ophim-crawler.log'),
                 'level' => env('LOG_LEVEL', 'debug'),
                 'days' => 7,
             ],
@@ -46,7 +46,7 @@ class OphimCrawlerServiceProvider extends SP
 
         config(['ophim.updaters' => array_merge(config('ophim.updaters', []), [
             [
-                'name' => 'Ophim Crawler',
+                'name' => 'Tải dữ liệu Ophim',
                 'handler' => 'Ophim\Crawler\OphimCrawler\Crawler'
             ]
         ])]);
