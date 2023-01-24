@@ -6,6 +6,9 @@
         "tannhatcms/ophim-core": "*",
         "intervention/image": "^2.7"
     },
+    "replace": {
+        "hacoidev/ophim-crawler":"*"
+    },
     "license": "MIT",
     "autoload": {
         "psr-4": {
