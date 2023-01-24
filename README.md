@@ -11,7 +11,7 @@
 ![Alt text](https://i.ibb.co/5jY3s2P/CRAWLER-SCHEDULE.png "Options Page")
 
 ## Requirements
-https://github.com/hacoidev/ophim-core
+https://github.com/TanNhatCMS/ophim-core
 
 ## Install
 - Tại thư mục của Project: `composer require hacoidev/ophim-crawler`
@@ -20,21 +20,16 @@ https://github.com/hacoidev/ophim-core
 - Tại thư mục của Project: `composer update hacoidev/ophim-crawler`
 
 ## Setup Crontab
-[Setup crontab, add this entry](https://github.com/hacoidev/ophim-core#reset-view-counter)
+[Setup crontab, add this entry](https://github.com/TanNhatCMS/ophim-core#reset-view-counter)
 
 ## Changelog
-### 1.1.0
 - Update crawler schedule
-### 1.0.3
 - Fix Logic save field crawler
-### 1.0.2
 - enable check hasChange
-### 1.0.1
 - Fix sync episodes
 ### 23/09/2022
 - Ghi nhớ fields crawl + download images
 - Fix crawl pages hạn chế timeout khi nhiều page
-
 ### 22/09/2022
 - Thêm lọc bỏ qua theo định dạng
 - Tạo thể loại đối với định dạng là `hoạt hình` và `tv shows`
