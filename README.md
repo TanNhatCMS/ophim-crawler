@@ -14,10 +14,10 @@
 https://github.com/TanNhatCMS/ophim-core
 
 ## Install
-- Tại thư mục của Project: `composer require hacoidev/ophim-crawler`
+- Tại thư mục của Project: `composer require tannhatcms/ophim-crawler`
 
 ## Update
-- Tại thư mục của Project: `composer update hacoidev/ophim-crawler`
+- Tại thư mục của Project: `composer update tanhatcms/ophim-crawler`
 
 ## Setup Crontab
 [Setup crontab, add this entry](https://github.com/TanNhatCMS/ophim-core#reset-view-counter)
