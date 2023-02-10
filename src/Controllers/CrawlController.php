@@ -73,7 +73,7 @@ class CrawlController extends CrudController
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage(), 'wait' => false], 500);
         }
-        return response()->json(['message' => 'OK', 'wait' => $crawler ?? true]);
+        return response()->json(['message' => 'Xong', 'wait' => $crawler ?? true]);
     }
 
     protected function movieUpdateOptions(): array
