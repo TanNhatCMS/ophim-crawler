@@ -33,7 +33,10 @@ class CrawlerSettingController extends CrudController
      */
     public function editOptions()
     {
-        $this->authorize('update', CrawlSchedule::class );
+        if (!backpack_user()->hasPermissionTo('Update crawl schedule')) {
+            abort(403);
+        }
+
         $setting = Option::getEntry();
 
         $this->data['entry'] = $setting;
