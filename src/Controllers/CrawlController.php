@@ -49,7 +49,10 @@ class CrawlController extends CrudController
 
     public function showCrawlPage(Request $request)
     {
-        $this->authorize('browse', CrawlSchedule::class);
+        if (!backpack_user()->hasPermissionTo('Browse crawl schedule')) {
+            abort(403);
+        }
+
         $categories = Cache::remember('ophim_categories', config('ophim_cache_ttl', 5 * 60), function () {
             $data = json_decode(file_get_contents(sprintf('%s/the-loai', config('ophim_crawler.domain', 'https://ophim1.com'))), true) ?? [];
             return collect($data)->pluck('name', 'name')->toArray();
