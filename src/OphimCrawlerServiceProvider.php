@@ -27,8 +27,7 @@ class OphimCrawlerServiceProvider extends SP
     }
     public function register()
     {
-        $this->mergePolicies();
-
+       
         config(['plugins' => array_merge(config('plugins', []), [
             'ophim-crawler' =>
             [
@@ -74,12 +73,7 @@ class OphimCrawlerServiceProvider extends SP
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'ophim-crawler');
     }
 
-    protected function mergePolicies()
-    {
-        config(['backpack.permissionmanager.policies.permission' => PermissionPolicy::class]);
-        config(['backpack.permissionmanager.policies.role' => RolePolicy::class]);
-        config(['backpack.permissionmanager.policies.user' => UserPolicy::class]);
-    }
+
 
     protected function loadScheduler()
     {
