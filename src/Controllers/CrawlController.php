@@ -70,7 +70,7 @@ class CrawlController extends CrudController
 
     public function crawl(Request $request)
     {
-        $this->authorize('create', CrawlSchedule::class);
+
         $pattern = sprintf('%s/phim/{slug}', config('ophim_crawler.domain', 'https://ophim1.com'));
         try {
             $link = str_replace('{slug}', $request['slug'], $pattern);
