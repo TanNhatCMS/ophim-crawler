@@ -1,7 +1,9 @@
 <?php
 
 namespace Ophim\Crawler\OphimCrawler;
-
+use Ophim\Core\Policies\PermissionPolicy;
+use Ophim\Core\Policies\RolePolicy;
+use Ophim\Core\Policies\UserPolicy;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as SP;
 use Ophim\Crawler\OphimCrawler\Console\CrawlerScheduleCommand;
@@ -25,6 +27,7 @@ class OphimCrawlerServiceProvider extends SP
     }
     public function register()
     {
+        $this->mergePolicies();
 
         config(['plugins' => array_merge(config('plugins', []), [
             'ophim-crawler' =>
@@ -69,6 +72,13 @@ class OphimCrawlerServiceProvider extends SP
 
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'ophim-crawler');
+    }
+
+    protected function mergePolicies()
+    {
+        config(['backpack.permissionmanager.policies.permission' => PermissionPolicy::class]);
+        config(['backpack.permissionmanager.policies.role' => RolePolicy::class]);
+        config(['backpack.permissionmanager.policies.user' => UserPolicy::class]);
     }
 
     protected function loadScheduler()
