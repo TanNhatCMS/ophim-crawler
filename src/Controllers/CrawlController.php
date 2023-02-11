@@ -49,6 +49,7 @@ class CrawlController extends CrudController
 
     public function showCrawlPage(Request $request)
     {
+        $this->authorize('browse', CrawlSchedule::class);
         $categories = Cache::remember('ophim_categories', config('ophim_cache_ttl', 5 * 60), function () {
             $data = json_decode(file_get_contents(sprintf('%s/the-loai', config('ophim_crawler.domain', 'https://ophim1.com'))), true) ?? [];
             return collect($data)->pluck('name', 'name')->toArray();
@@ -66,6 +67,7 @@ class CrawlController extends CrudController
 
     public function crawl(Request $request)
     {
+        $this->authorize('create', CrawlSchedule::class);
         $pattern = sprintf('%s/phim/{slug}', config('ophim_crawler.domain', 'https://ophim1.com'));
         try {
             $link = str_replace('{slug}', $request['slug'], $pattern);
@@ -109,10 +111,12 @@ class CrawlController extends CrudController
                 'regions' => 'Khu vực',
                 'tags' => 'Từ khóa',
                 'studios' => 'Studio',
-            ]
+            ],
+            'Cập nhật' => [
+                'updated_at' => 'Cập nhật thời gian',
+            ],
         ];
     }
-
     public function getMoviesFromParams(Request $request) {
         $field = explode('-', request('params'))[0];
         $val = explode('-', request('params'))[1];

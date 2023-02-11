@@ -31,7 +31,9 @@ class Crawler extends BaseCrawler
         $info = (new Collector($payload, $this->fields, $this->forceUpdate))->get();
 
         if ($movie) {
-            $movie->updated_at = now();
+            if (in_array('updated_at', $this->fields)){
+                $movie->updated_at = now();
+            }
             $movie->update(collect($info)->only($this->fields)->merge(['update_checksum' => md5($body)])->toArray());
         } else {
             $movie = Movie::create(array_merge($info, [

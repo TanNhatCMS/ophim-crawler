@@ -33,6 +33,7 @@ class CrawlerSettingController extends CrudController
      */
     public function editOptions()
     {
+        $this->authorize('update', CrawlSchedule::class );
         $setting = Option::getEntry();
 
         $this->data['entry'] = $setting;
@@ -68,7 +69,10 @@ class CrawlerSettingController extends CrudController
      * @return array|\Illuminate\Http\RedirectResponse
      */
     public function updateOptions(Request $request)
-    {
+    {   
+        $this->authorize('update', CrawlSchedule::class );
+
+
         $this->crud->registerFieldEvents();
 
         // update the row in the db
