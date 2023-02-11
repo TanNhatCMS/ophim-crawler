@@ -6,19 +6,23 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as SP;
 use Ophim\Crawler\OphimCrawler\Console\CrawlerScheduleCommand;
 use Ophim\Crawler\OphimCrawler\Option;
+use Ophim\Core\Policies\CrawlSchedulePolicy;
+
 
 class OphimCrawlerServiceProvider extends SP
 {
-    /**
+
+ /**
      * Get the policies defined on the provider.
      *
      * @return array
      */
     public function policies()
     {
-        return [];
+        return [
+            CrawlSchedule::class => CrawlSchedulePolicy::class
+        ];
     }
-
     public function register()
     {
 
