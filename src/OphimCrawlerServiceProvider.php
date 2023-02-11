@@ -58,6 +58,7 @@ class OphimCrawlerServiceProvider extends SP
 
     public function boot()
     {
+        $this->registerPolicies();
         $this->commands([
             CrawlerScheduleCommand::class,
         ]);
