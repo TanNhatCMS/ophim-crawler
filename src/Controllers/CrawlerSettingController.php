@@ -73,7 +73,7 @@ class CrawlerSettingController extends CrudController
      */
     public function updateOptions(Request $request)
     {   
-        $this->authorize('update', CrawlSchedule::class );
+
 
 
         $this->crud->registerFieldEvents();
