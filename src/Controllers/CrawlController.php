@@ -52,17 +52,19 @@ class CrawlController extends CrudController
         if (!backpack_user()->hasPermissionTo('Browse crawl schedule')) {
             abort(403);
         }
+        $categories = [];
+        $regions = [];
+        try {
+            $categories = Cache::remember('ophim_categories', 86400, function () {
+                $data = json_decode(file_get_contents(sprintf('%s/the-loai', config('ophim_crawler.domain', 'https://ophim1.com'))), true) ?? [];
+                return collect($data)->pluck('name', 'name')->toArray();
+            });
 
-        $categories = Cache::remember('ophim_categories', config('ophim_cache_ttl', 5 * 60), function () {
-            $data = json_decode(file_get_contents(sprintf('%s/the-loai', config('ophim_crawler.domain', 'https://ophim1.com'))), true) ?? [];
-            return collect($data)->pluck('name', 'name')->toArray();
-        });
-
-        $regions = Cache::remember('ophim_regions', config('ophim_cache_ttl', 5 * 60), function () {
-            $data = json_decode(file_get_contents(sprintf('%s/quoc-gia', config('ophim_crawler.domain', 'https://ophim1.com'))), true) ?? [];
-            return collect($data)->pluck('name', 'name')->toArray();
-        });
-
+            $regions = Cache::remember('ophim_regions', 86400, function () {
+                $data = json_decode(file_get_contents(sprintf('%s/quoc-gia', config('ophim_crawler.domain', 'https://ophim1.com'))), true) ?? [];
+                return collect($data)->pluck('name', 'name')->toArray();
+            });
+        } catch (\Throwable $th) {}
         $fields = $this->movieUpdateOptions();
 
         return view('ophim-crawler::crawl', compact('fields', 'regions', 'categories'));
