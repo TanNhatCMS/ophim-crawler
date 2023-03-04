@@ -100,7 +100,7 @@ class Collector
                 });
             }
 
-            Storage::disk('public')->put($path, null);
+            Storage::disk('public')->put($path, "");
 
             $img->save(storage_path("app/public/" . $path));
 
