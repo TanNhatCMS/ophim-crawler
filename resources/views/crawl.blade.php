@@ -1,12 +1,12 @@
 @extends(backpack_view('blank'))
 
 @php
-$defaultBreadcrumbs = [
-    trans('backpack::crud.admin') => backpack_url('dashboard'),
-    'Crawler' => backpack_url('plugin/ophim-crawler'),
-];
+    $defaultBreadcrumbs = [
+        trans('backpack::crud.admin') => backpack_url('dashboard'),
+        'Crawler' => backpack_url('plugin/ophim-crawler'),
+    ];
 
-$breadcrumbs = $breadcrumbs ?? $defaultBreadcrumbs;
+    $breadcrumbs = $breadcrumbs ?? $defaultBreadcrumbs;
 @endphp
 
 @section('header')
