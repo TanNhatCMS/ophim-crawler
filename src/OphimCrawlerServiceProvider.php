@@ -78,6 +78,6 @@ class OphimCrawlerServiceProvider extends SP
     protected function loadScheduler()
     {
         $schedule = $this->app->make(Schedule::class);
-        $schedule->command('ophim:plugins:ophim-crawler:schedule')->cron(Option::get('crawler_schedule_cron_config', '*/10 * * * *'))->withoutOverlapping();
+        $schedule->command('ophim:plugins:ophim-crawler:schedule')->cron(Option::get('crawler_schedule_cron_config', '*/10 * * * *'))->withoutOverlapping()->runInBackground();
     }
 }
