@@ -40,13 +40,13 @@ class OphimCrawlerServiceProvider extends SP
                 ],
             ]
         ])]);
-
         config(['logging.channels' => array_merge(config('logging.channels', []), [
             'ophim-crawler' => [
                 'driver' => 'daily',
-                'path' => storage_path('logs/tannhatcms/ophim-crawler.log'),
+                'path' => storage_path('logs/crawler-ophim.log'),
                 'level' => env('LOG_LEVEL', 'debug'),
-                'days' => 7,
+                'days' => 14,
+                'permission' => 777,
             ],
         ])]);
 
