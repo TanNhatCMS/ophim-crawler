@@ -14,6 +14,18 @@ use Ophim\Crawler\OphimCrawler\Contracts\BaseCrawler;
 
 class Crawler extends BaseCrawler
 {
+    protected $logger;
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->logger = Log::channel('ophim-crawler');
+        parent::__construct();
+    }
+
     public function handle()
     {
         $payload = json_decode($body = file_get_contents($this->link), true);
@@ -42,7 +54,7 @@ class Crawler extends BaseCrawler
                 'update_checksum' => md5($body)
             ]));
         }
-
+        $this->logger->notice(sprintf("Crawler Movies %s(%s)", $payload['movie']['name'], $payload['movie']['slug']));
         $this->syncActors($movie, $payload);
         $this->syncDirectors($movie, $payload);
         $this->syncCategories($movie, $payload);

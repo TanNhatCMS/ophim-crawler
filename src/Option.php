@@ -102,19 +102,19 @@ class Option
                 'label' => 'API Domain',
                 'type' => 'text',
                 'value' => 'https://ophim1.com',
-                'tab' => 'Setting'
+                'tab' => 'Cài đặt chung'
             ],
             'download_image' => [
                 'name' => 'download_image',
                 'label' => 'Tải ảnh khi crawl',
                 'type' => 'checkbox',
-                'tab' => 'Image Optimize'
+                'tab' => 'Tối ưu hóa hình ảnh'
             ],
             'should_resize_thumb' => [
                 'name' => 'should_resize_thumb',
                 'label' => 'Resize ảnh thumb khi tải về',
                 'type' => 'checkbox',
-                'tab' => 'Image Optimize'
+                'tab' => 'Tối ưu hóa hình ảnh'
             ],
             'resize_thumb_width' => [
                 'name' => 'resize_thumb_width',
@@ -128,7 +128,7 @@ class Option
                 'wrapper' => [
                     'class'       => 'form-group col-md-6',
                 ],
-                'tab' => 'Image Optimize'
+                'tab' => 'Tối ưu hóa hình ảnh'
             ],
             'resize_thumb_height' => [
                 'name' => 'resize_thumb_height',
@@ -141,13 +141,13 @@ class Option
                 'wrapper' => [
                     'class'       => 'form-group col-md-6',
                 ],
-                'tab' => 'Image Optimize'
+                'tab' => 'Tối ưu hóa hình ảnh'
             ],
             'should_resize_poster' => [
                 'name' => 'should_resize_poster',
                 'label' => 'Resize ảnh poster khi tải về',
                 'type' => 'checkbox',
-                'tab' => 'Image Optimize'
+                'tab' => 'Tối ưu hóa hình ảnh'
             ],
             'resize_poster_width' => [
                 'name' => 'resize_poster_width',
@@ -161,7 +161,7 @@ class Option
                 'wrapper' => [
                     'class'       => 'form-group col-md-6',
                 ],
-                'tab' => 'Image Optimize'
+                'tab' => 'Tối ưu hóa hình ảnh'
             ],
             'resize_poster_height' => [
                 'name' => 'resize_poster_height',
@@ -174,14 +174,14 @@ class Option
                 'wrapper' => [
                     'class'       => 'form-group col-md-6',
                 ],
-                'tab' => 'Image Optimize'
+                'tab' => 'Tối ưu hóa hình ảnh'
             ],
             'crawler_schedule_enable' => [
                 'name' => 'crawler_schedule_enable',
                 'label' => '<b>Bật/Tắt tự động</b>',
                 'default' => false,
                 'type' => 'checkbox',
-                'tab' => 'Schedule'
+                'tab' => 'Lịch trình'
             ],
             'crawler_schedule_page_from' => [
                 'name' => 'crawler_schedule_page_from',
@@ -195,7 +195,7 @@ class Option
                 'wrapper' => [
                     'class'       => 'form-group col-md-4',
                 ],
-                'tab' => 'Schedule'
+                'tab' => 'Lịch trình'
             ],
             'crawler_schedule_page_to' => [
                 'name' => 'crawler_schedule_page_to',
@@ -209,7 +209,7 @@ class Option
                 'wrapper' => [
                     'class'       => 'form-group col-md-4',
                 ],
-                'tab' => 'Schedule'
+                'tab' => 'Lịch trình'
             ],
             'crawler_schedule_cron_config' => [
                 'name'        => 'crawler_schedule_cron_config',
@@ -224,7 +224,7 @@ class Option
                 'wrapper' => [
                     'class'       => 'form-group col-md-4',
                 ],
-                'tab'   => 'Schedule'
+                'tab'   => 'Lịch trình'
             ],
             'crawler_schedule_excludedType' => [
                 'name' => 'crawler_schedule_excludedType',
@@ -233,7 +233,7 @@ class Option
                 'options'         => ['series' => 'Phim Bộ', 'single' => 'Phim Lẻ', 'hoathinh' => 'Hoạt Hình', 'tvshows' => 'TV Shows'],
                 'allows_null'     => false,
                 'allows_multiple' => true,
-                'tab' => 'Schedule'
+                'tab' => 'Lịch trình'
             ],
             'crawler_schedule_excludedCategories' => [
                 'name' => 'crawler_schedule_excludedCategories',
@@ -242,7 +242,7 @@ class Option
                 'options'         => $categories,
                 'allows_null'     => false,
                 'allows_multiple' => true,
-                'tab' => 'Schedule'
+                'tab' => 'Lịch trình'
             ],
             'crawler_schedule_excludedRegions' => [
                 'name' => 'crawler_schedule_excludedRegions',
@@ -251,7 +251,7 @@ class Option
                 'options'         => $regions,
                 'allows_null'     => false,
                 'allows_multiple' => true,
-                'tab' => 'Schedule'
+                'tab' => 'Lịch trình'
             ],
             'crawler_schedule_fields' => [
                 'name' => 'crawler_schedule_fields',
@@ -261,7 +261,7 @@ class Option
                 'options'         => $fields,
                 'allows_null'     => false,
                 'allows_multiple' => true,
-                'tab' => 'Schedule'
+                'tab' => 'Lịch trình'
             ],
         ];
     }

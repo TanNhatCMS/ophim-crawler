@@ -301,14 +301,19 @@
                 return;
             }
             $('textarea[name="link"]').removeClass('is-invalid');
-
+            const excludedCategories = $("[name='excludedCategories[]']").val()
+            const excludedRegions = $("[name='excludedRegions[]']").val()
+            const excludedType = $("[name='excludedType[]']").val()
             const fetchApi = async (link, from, to) => {
                 isFetching = true;
                 const response = await fetch("{{ backpack_url('plugin/ophim-crawler/fetch') }}?" +
                     new URLSearchParams({
                         link,
                         from,
-                        to
+                        to,
+                        excludedCategories,
+                        excludedRegions,
+                        excludedType
                     }));
 
                 if (response.status >= 200 && response.status < 300) {
@@ -345,7 +350,7 @@
                     return
                 }
 
-                $('.btn-load').html(`Đang tải...: Page ${current}/${to}`);
+                $('.btn-load').html(`Đang tải...: Trang ${current}/${to}`);
 
                 fetchApi(link, current, current).then(res => {
                     if (res.payload.length > 0) {
@@ -380,7 +385,7 @@
                     html +=
                         `<p class="crawling-movie text-muted d-flex justify-content-between" data-slug="${item.slug}">
                             <span>${i+1}. ${item.name}</span>
-                            <span class="status">Pending</span>
+                            <span class="status">Chưa xử lý</span>
                         </p>`
                 })
                 return html;
@@ -444,16 +449,16 @@
                 processMovie(slug).then(res => {
                     $(`.crawling-movie[data-slug="${slug}"]`).removeClass('text-info');
                     $(`.crawling-movie[data-slug="${slug}"]`).addClass('text-success');
-                    $(`.crawling-movie[data-slug="${slug}"] .status`).html('OK');
+                    $(`.crawling-movie[data-slug="${slug}"] .status`).html('Xong');
                     $(`.crawling-movie[data-slug="${slug}"]`).addClass('crawl-success');
                     wait = res.payload.wait;
                 }).catch(err => {
                     $(`.crawling-movie[data-slug="${slug}"]`).removeClass('text-info');
                     $(`.crawling-movie[data-slug="${slug}"]`).addClass('text-danger');
-                    $(`.crawling-movie[data-slug="${slug}"] .status`).html('Error');
+                    $(`.crawling-movie[data-slug="${slug}"] .status`).html('Lỗi');
                     $(`.crawling-movie[data-slug="${slug}"]`).addClass('crawl-failed');
                     $(`#logs`).append(
-                        `<li class="text-danger">${slug} : ${err?.payload?.message ?? 'Unknown error'}</li>`
+                        `<li class="text-danger">${slug} : ${err?.payload?.message ?? 'Lỗi không xác định'}</li>`
                         );
                     wait = false;
                 }).finally(() => {
@@ -471,7 +476,7 @@
         const processMovie = async (slug) => {
             $(`.crawling-movie[data-slug="${slug}"]`).removeClass('text-muted');
             $(`.crawling-movie[data-slug="${slug}"]`).addClass('text-info');
-            $(`.crawling-movie[data-slug="${slug}"] .status`).html('Processing');
+            $(`.crawling-movie[data-slug="${slug}"] .status`).html('Đang xử lý');
 
             const fields = $("input[name='fields[]']:checked")
                 .map(function() {

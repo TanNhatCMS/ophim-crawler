@@ -17,13 +17,18 @@ use Ophim\Core\Models\Movie;
  */
 class CrawlController extends CrudController
 {
+    protected $excludedCategories;
+    protected $excludedRegions;
+    protected $excludedType;
+
     public function fetch(Request $request)
     {
         try {
             $data = collect();
-
+            $this->excludedCategories = request('excludedCategories', []);
+            $this->excludedRegions = request('excludedRegions', []);
+            $this->excludedType = request('excludedType', []);
             $request['link'] = preg_split('/[\n\r]+/', $request['link']);
-
             foreach ($request['link'] as $link) {
                 if (preg_match('/(.*?)(\/phim\/)(.*?)/', $link)) {
                     $link = sprintf('%s/phim/%s', config('ophim_crawler.domain', 'https://ophim1.com'), explode('phim/', $link)[1]);
@@ -35,6 +40,10 @@ class CrawlController extends CrudController
                             'page' => $i
                         ]), true);
                         if ($response['status']) {
+                            //$payload = json_decode($body = file_get_contents($response['items']), true);
+                            //if($this->checkIsInExcludedList($payload)){
+                           //     $data->push(...$response['items']);
+                            //}
                             $data->push(...$response['items']);
                         }
                     }
@@ -131,4 +140,21 @@ class CrawlController extends CrudController
             return Movie::where($field, $val)->get();
         }
     }
+    protected function checkIsInExcludedList($payload)
+    {
+        $newType = $payload['movie']['type'];
+        if (in_array($newType, $this->excludedType)) {
+            return false;
+        }
+        $newCategories = collect($payload['movie']['category'])->pluck('name')->toArray();
+        if (array_intersect($newCategories, $this->excludedCategories)) {
+            return false;
+        }
+        $newRegions = collect($payload['movie']['country'])->pluck('name')->toArray();
+        if (array_intersect($newRegions, $this->excludedRegions)) {
+            return false;
+        }
+        return true;
+    }
+
 }
