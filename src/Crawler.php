@@ -21,10 +21,10 @@ class Crawler extends BaseCrawler
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($link, $fields, $excludedCategories = [], $excludedRegions = [], $excludedType = [], $forceUpdate)
     {
         $this->logger = Log::channel('ophim-crawler');
-        parent::__construct();
+        parent::__construct($link, $fields, $excludedCategories , $excludedRegions , $excludedType , $forceUpdate);
     }
 
     public function handle()
