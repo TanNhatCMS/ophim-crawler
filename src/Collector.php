@@ -111,7 +111,7 @@ class Collector
 
             Storage::disk('public')->put($path, "");
 
-            $img->save(storage_path("app/public/" . $path));
+            $img->save(storage_path("app/public/" . $path), 100);
 
             return Storage::url($path);
         } catch (\Exception $e) {
